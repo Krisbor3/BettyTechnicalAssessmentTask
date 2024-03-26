@@ -2,7 +2,7 @@
 {
     public class Game
     {
-        private double balance = 0;
+        private decimal balance = 0;
 
         public void Play()
         {
@@ -19,7 +19,7 @@
                     }
                     string[] split = input.Split(' ');
                     string action = split[0];
-                    double value = double.Parse(split[1]);
+                    decimal value = decimal.Parse(split[1]);
 
                     if (action == "bet")
                     {
@@ -53,7 +53,7 @@
             }
         }
 
-        private void Bet(double amount)
+        private void Bet(decimal amount)
         {
             //place bet
             balance -= amount;
@@ -69,7 +69,7 @@
             //2x win
             else if (randChance > 50 && randChance <= 90)
             {
-                double wonAmount = amount * 2;
+                decimal wonAmount = amount * 2;
                 balance += wonAmount;
                 Console.WriteLine($"Congrats - you won ${wonAmount}! Your current balance is: ${balance}");
             }
@@ -77,7 +77,7 @@
             else if (randChance > 90 && randChance <= 100)
             {
                 int x = GenerateMultiplier();
-                double wonAmount = amount * x;
+                decimal wonAmount = amount * x;
                 balance += wonAmount;
                 Console.WriteLine($"Congrats - you won ${wonAmount}! Your current balance is: ${balance}");
             }
@@ -90,8 +90,8 @@
             return multi;
         }
 
-        private double Deposit(double amount) => balance += amount;
+        private decimal Deposit(decimal amount) => balance += amount;
 
-        private double Withdraw(double amount) => balance -= amount;
+        private decimal Withdraw(decimal amount) => balance -= amount;
     }
 }
