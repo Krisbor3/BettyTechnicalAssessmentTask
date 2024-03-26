@@ -60,7 +60,7 @@
 
             //generate chance
             Random rnd = new Random();
-            int randChance = rnd.Next(1, 100);
+            int randChance = rnd.Next(1, 101);
             //50% lose case
             if (randChance > 0 && randChance <= 50)
             {
@@ -86,7 +86,7 @@
         private int GenerateMultiplier()
         {
             Random rnd = new Random();
-            int multi = rnd.Next(2, 10);
+            int multi = rnd.Next(2, 11);
             return multi;
         }
 
