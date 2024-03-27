@@ -26,7 +26,7 @@
                     {
                         if (value <= 0 || value > 10)
                         {
-                            Console.WriteLine("You can only place bets between $1 and $10");
+                            Console.WriteLine(ValidationMessages.BetsBetweenOneAndTen);
                             continue;
                         }
                         Bet(value);
@@ -40,7 +40,7 @@
                         }
                         else
                         {
-                            Console.WriteLine("The deposit amount must be positive or higher than $0");
+                            Console.WriteLine(ValidationMessages.PositiveDeposit);
                         }
                     }
                     else if (action == "withdraw")
@@ -49,12 +49,12 @@
                     }
                     else
                     {
-                        Console.WriteLine($"Action {action} is not recognised");
+                        Console.WriteLine(ValidationMessages.UnexpectedAction,action);
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Something went wrong! Please try again.");
+                    Console.WriteLine(ValidationMessages.ExceptionMessage);
                 }
             }
             Console.WriteLine("Thank you for playing! Hope to see you again soon.");
@@ -64,7 +64,7 @@
         {
             if (balance == 0 || balance - amount < 0)
             {
-                Console.WriteLine("Sorry, You don't have enough balance!");
+                Console.WriteLine(ValidationMessages.NotEnoughBalance);
                 return;
             }
             //place bet
@@ -108,7 +108,7 @@
         {
             if (balance - amount < 0)
             {
-                Console.WriteLine("Sorry, You don't have enough balance!");
+                Console.WriteLine(ValidationMessages.NotEnoughBalance);
             }
             else
             {
