@@ -7,9 +7,10 @@
         public void Play()
         {
             string input = "";
-            try
+
+            while (true)
             {
-                while (true)
+                try
                 {
                     Console.WriteLine("Please, submit action:");
                     input = Console.ReadLine().ToLower();
@@ -32,29 +33,40 @@
                     }
                     else if (action == "deposit")
                     {
-                        Deposit(value);
-                        Console.WriteLine($"Your deposit of ${value} was successful. Your current balance is: ${balance}");
+                        if (value > 0)
+                        {
+                            Deposit(value);
+                            Console.WriteLine($"Your deposit of ${value} was successful. Your current balance is: ${balance}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The deposit amount must be positive or higher than $0");
+                        }
                     }
                     else if (action == "withdraw")
                     {
                         Withdraw(value);
-                        Console.WriteLine($"Your withdrawal of ${value} was successful. Your current balance is: {balance}");
                     }
                     else
                     {
                         Console.WriteLine($"Action {action} is not recognised");
                     }
                 }
-                Console.WriteLine("Thank you for playing! Hope to see you again soon.");
+                catch (Exception)
+                {
+                    Console.WriteLine("Something went wrong! Please try again.");
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Something went wrong!");
-            }
+            Console.WriteLine("Thank you for playing! Hope to see you again soon.");
         }
 
         private void Bet(decimal amount)
         {
+            if (balance == 0 || balance - amount < 0)
+            {
+                Console.WriteLine("Sorry, You don't have enough balance!");
+                return;
+            }
             //place bet
             balance -= amount;
 
@@ -92,6 +104,17 @@
 
         private decimal Deposit(decimal amount) => balance += amount;
 
-        private decimal Withdraw(decimal amount) => balance -= amount;
+        private void Withdraw(decimal amount)
+        {
+            if (balance - amount < 0)
+            {
+                Console.WriteLine("Sorry, You don't have enough balance!");
+            }
+            else
+            {
+                balance -= amount;
+                Console.WriteLine($"Your withdrawal of ${amount} was successful. Your current balance is: {balance}");
+            }
+        }
     }
 }
